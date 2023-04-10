@@ -50,7 +50,8 @@ public class Service {
 	@POST
  	@Path("/reg")
  	@Consumes("application/json")
-	@Produces("text/plain")
+	@Produces("application/json")
+	// @Produces("text/plain")
  	public Response signUp(String fileJSON) throws Exception 
  	{            
 		System.out.println("================" + fileJSON + "======================================");
@@ -59,10 +60,11 @@ public class Service {
 	 	List<String> logs;
 	 	logs = jsonb.fromJson(fileJSON, List.class);
 		boolean res = model.registrateNewUser(logs.get(0), logs.get(1));
-		
+
 		if(res) {
 			return Response.ok(jsonb.toJson(model.createToken(logs.get(0)))).build();
 		}
+
 		return Response.status(Response.Status.UNAUTHORIZED).build();
 		
  	}
@@ -90,7 +92,8 @@ public class Service {
  	}
 	
 	
-	@POST // отправляем данные на сервер.
+	// отправляем данные на сервер.
+	@POST
 	@Path("catalogs/product-catalog/add")
 	@Consumes("application/json")
 	@Produces("text/plain")
