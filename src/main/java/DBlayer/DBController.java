@@ -61,18 +61,15 @@ public class DBController implements IDBController{
 	//============================================================
 	@Override
 	public boolean RegistrationNewUser(String login, String password){
+		ResultSet result;
 		int size = 0;
 		try {
-			ResultSet result = this.GetSelectResult("Select * from users");
-			while (result.next()) {
-				size++;
-			}
-			
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			result = this.GetSelectResult("Select MAX(user_id) from users");
+			result.next();
+			size = result.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
 		
 		String SELECT_SQL = "insert into users(user_login, user_password, user_id) values('"+login +"', '"+CP.getCryptPassword(password)+"'," + ++size + ")";
 		try {
@@ -181,6 +178,40 @@ public class DBController implements IDBController{
 	private void addDBPool(IDBpool pool) {
 		if(this.DBpool == null) {
 			this.DBpool = pool;
+		}
+	}
+
+	@Override
+	public boolean ChangePassword(String login, String newPassword) {
+		String SELECT_SQL = "update users set user_password = '" + CP.getCryptPassword(newPassword) + "' where user_login = '" + login + "'";
+		try {
+			
+			if(!login.isEmpty() && !newPassword.isEmpty()) {
+				this.EnterQwery(SELECT_SQL);
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean DeleteUser(String login) {
+		String SELECT_SQL = "delete from users" + " where user_login = '" + login + "'";
+		try {
+			
+			if(!login.isEmpty()) {
+				this.EnterQwery(SELECT_SQL);
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (SQLException e) {
+			return false;
 		}
 	}
 	

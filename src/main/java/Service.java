@@ -5,6 +5,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
@@ -13,6 +14,7 @@ import controller.interceptor.TokenRequired;
 import jakarta.inject.Inject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
+import jakarta.json.bind.JsonbException;
 import model.modelLayer.IModel;
 
 @Path("/")
@@ -65,9 +67,37 @@ public class Service {
 			return Response.ok(jsonb.toJson(model.createToken(logs.get(0)))).build();
 		}
 
-		return Response.status(Response.Status.UNAUTHORIZED).build();
-		
+		//return Response.status(Response.Status.UNAUTHORIZED).build();
+		return Response.ok(res).build();
  	}
+
+	// смена пароля
+	@POST
+	@Path("/changePassword")
+	public Response changePassword(String fileJSON) throws JsonbException, Exception{
+		Jsonb jsonb = JsonbBuilder.create();
+		List<String> logs;
+	 	logs = jsonb.fromJson(fileJSON, List.class);
+		boolean result = model.changePassword(logs.get(0), logs.get(1));
+		if(result) {
+			return Response.ok(jsonb.toJson(model.createToken(logs.get(0)))).build();
+		}
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+	}
+
+	// удаление пользователя
+	@POST
+	@Path("/deleteUser")
+	public Response deleteUser(String fileJSON){
+		Jsonb jsonb = JsonbBuilder.create();
+		List<String> logs;
+	 	logs = jsonb.fromJson(fileJSON, List.class);
+		boolean result = model.deleteUser(logs.get(0));
+		if(result) {
+			return Response.ok().build();
+		}
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+	}
 	
 	
 	// получение данных из сервера.

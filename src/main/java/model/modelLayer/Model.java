@@ -128,5 +128,29 @@ public class Model implements IModel{
 		if(this.IDBController == null)
 			this.IDBController = controller;
 	}
+
+	@Override
+	public boolean changePassword(String login, String newPassword) {
+		this.injectIDBController(ClassFactory.injectDBController());
+      	try {       
+    	  	return IDBController.ChangePassword(login, newPassword);
+      	}
+      	catch (Exception e) {
+      		System.out.println("ERROR TO CHANGE PASSWORD: " + e.getMessage());
+      		return false;
+      	}
+	}
+
+	@Override
+	public boolean deleteUser(String login) {
+		this.injectIDBController(ClassFactory.injectDBController());
+      	try {       
+    	  	return IDBController.DeleteUser(login);
+      	}
+      	catch (Exception e) {
+      		System.out.println("ERROR TO DELETE USER: " + e.getMessage());
+      		return false;
+      	}
+	}
       	
 }
