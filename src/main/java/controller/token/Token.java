@@ -5,11 +5,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class Token {
     
-    public static String create(String login){
+    public static String create(String login, String role){
         TokenKey tokenKey = new TokenKey();
         Key key = tokenKey.getKey();
         TokenIssuer tokenIssuer = new TokenIssuer(key);
-        String jwt = tokenIssuer.issueToken(login);
+        String jwt = tokenIssuer.issueToken(login, role);
         return jwt;
     }
 

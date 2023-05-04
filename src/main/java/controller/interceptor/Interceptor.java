@@ -6,7 +6,7 @@ import jakarta.ws.rs.NotAuthorizedException;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.ext.Provider;
-import model.modelLayer.IModel;
+import model.interfaces.in.IModel;
 
 @Provider
 @TokenRequired
