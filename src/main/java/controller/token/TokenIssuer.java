@@ -18,7 +18,7 @@ public class TokenIssuer {
     }
 
     public String issueToken(String login, String role){
-        LocalDateTime expiryPeriod = LocalDateTime.now().plusMinutes(600L);
+        LocalDateTime expiryPeriod = LocalDateTime.now().plusMinutes(600L); // длительность токена
         Date expirationDateTime = Date.from(
             expiryPeriod.atZone(ZoneId.systemDefault())
             .toInstant());

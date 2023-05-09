@@ -160,8 +160,7 @@ public class Service {
 	@Produces("text/plain")
 	@TokenRequired
 	public Response delProd(String fileJSON) throws Exception {
-		// System.out.println("================" + name +
-		// "======================================");
+		// System.out.println("================" + name + "======================================");
 
 		Jsonb jsonb = JsonbBuilder.create();
 		List<String> nameOfProd = jsonb.fromJson(fileJSON, new ArrayList<String>() {
