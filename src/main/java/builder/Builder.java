@@ -4,16 +4,12 @@ import builder.Build.Built;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
-import model.interfaces.in.IModel;
 import model.interfaces.in.IModelProduct;
 import model.interfaces.in.IModelUser;
 import model.interfaces.out.IProductRepository;
 import model.interfaces.out.IUserRepository;
 
 public class Builder {
-	@Inject
-	@Default
-	private IModel model;
 
 	@Inject
 	@Default

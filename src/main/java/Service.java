@@ -7,8 +7,8 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
+import jms.Tokenable;
 import model.dto.User;
-import model.interfaces.in.IModel;
 import model.interfaces.in.IModelProduct;
 import model.interfaces.in.IModelUser;
 
@@ -26,8 +26,11 @@ public class Service {
 	@Context
 	ContainerRequestContext requestContext;
 
+	//@Inject
+	//IModel model;
+
 	@Inject
-	IModel model;
+	Tokenable model;
 
 	@Inject
 	@Built

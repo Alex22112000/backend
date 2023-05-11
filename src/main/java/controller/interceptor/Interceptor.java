@@ -6,14 +6,15 @@ import jakarta.ws.rs.NotAuthorizedException;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.ext.Provider;
-import model.interfaces.in.IModel;
+import jms.Tokenable;
 
 @Provider
 @TokenRequired
 public class Interceptor implements ContainerRequestFilter {
 
     @Inject
-    private IModel model;
+    private Tokenable model;
+    //private IModel model;
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
