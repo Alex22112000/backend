@@ -24,6 +24,7 @@ public class ProductService {
     
     @GET
 	@Produces("application/json")
+	@Consumes("application/json")
 	@TokenRequired
 	public Response pushCatalog(){
 		String resultJSON;

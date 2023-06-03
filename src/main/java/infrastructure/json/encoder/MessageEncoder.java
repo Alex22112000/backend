@@ -1,4 +1,4 @@
-package application.chat.message.json.encoder;
+package infrastructure.json.encoder;
 
 import application.chat.message.Message;
 import jakarta.json.bind.Jsonb;

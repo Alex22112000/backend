@@ -25,7 +25,7 @@ public class Timer {
 
     @PostConstruct    
     public void start() {
-        timerService.createIntervalTimer(new Date(), 70000, new TimerConfig()); 
+        timerService.createIntervalTimer(new Date(), 100000, new TimerConfig()); 
     }
   
     @Timeout
